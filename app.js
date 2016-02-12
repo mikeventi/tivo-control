@@ -18,11 +18,20 @@ app.get('/tivo/channel/:channel', function (req, res) {
 	   console.log('Connected and sending: ' + 'SETCH ' + req.params.channel);
 	   client.write('SETCH ' + req.params.channel + '\r');
     });
+    client.on('data',function(chunkData){       
+        console.log(chunkData);
+        client.end();
+    }); 
+
+    client.on('end',function(){
+        console.log("Reading end");
+    });
+
     client.on('error', function(err){
         console.log("Error: "+err.message);
     })
+    
     res.send('OK');
-    client.destroy();
 });
 
 app.listen(8080);
