@@ -8,19 +8,19 @@ var net = require('net');
 var app = express();
 
 app.get('/tivo/channel/:channel', function (req, res) {
-	// TiVo Configuration
-	var tivoIp = conf.tivoIp;
+    // TiVo Configuration
+    var tivoIp = conf.tivoIp;
     var tivoPort = conf.tivoPort;
     // Create Socket Object
     var client = new net.Socket();
-    
-    console.log(req.params.channel);
 
     client.connect(tivoPort, tivoIp, function() {
+    if (err) throw err;
 	console.log('Connected and sending: ' + 'SETCH ' + req.params.channel);
 	client.write('SETCH ' + req.params.channel + '\r');
-        client.destroy();
+    client.destroy();
     });
     res.send('OK');
 });
+
 app.listen(8080);
