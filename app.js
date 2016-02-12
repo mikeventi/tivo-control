@@ -12,24 +12,25 @@ app.get('/tivo/channel/:channel', function (req, res) {
     var tivoIp = conf.tivoIp;
     var tivoPort = conf.tivoPort;
     // Create Socket Object
-    var client = new net.Socket();
+    // var client = new net.Socket();
 
-    client.connect(tivoPort, tivoIp, function() {
-	   console.log('Connected and sending: ' + 'SETCH ' + req.params.channel);
-	   client.write('SETCH ' + req.params.channel + '\r');
-    });
-    client.on('data',function(chunkData){       
-        console.log(chunkData);
-        client.end();
-    }); 
+    // client.connect(tivoPort, tivoIp, function() {
+	   // console.log('Connected and sending: ' + 'SETCH ' + req.params.channel);
+	   // client.write('SETCH ' + req.params.channel + '\r');
+    // });
 
-    client.on('end',function(){
-        console.log("Reading end");
-    });
+    // client.on('end',function(){
+    //     console.log("Reading end");
+    // });
 
-    client.on('error', function(err){
-        console.log("Error: "+err.message);
-    })
+    // client.on('data',function(data){       
+    //     console.log(data);
+    //     client.destroy();
+    // }); 
+
+    // client.on('error', function(err){
+    //     console.log("Error: " + err.message);
+    // })
     
     res.send('OK');
 });
