@@ -5,7 +5,8 @@
   "main": "app.js",
   "private": true,
   "dependencies": {
-    "express": "^4.13.3"
+    "express": "^4.13.3",
+    "jsel":"^1.1.4"
   },
   "author": "Michael Ventimiglia",
   "license": "MIT"
