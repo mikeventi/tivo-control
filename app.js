@@ -15,12 +15,14 @@ app.get('/tivo/channel/:channel', function (req, res) {
     var client = new net.Socket();
 
     client.connect(tivoPort, tivoIp, function() {
-    if (err) throw err;
-	console.log('Connected and sending: ' + 'SETCH ' + req.params.channel);
-	client.write('SETCH ' + req.params.channel + '\r');
-    client.destroy();
+	   console.log('Connected and sending: ' + 'SETCH ' + req.params.channel);
+	   client.write('SETCH ' + req.params.channel + '\r');
     });
+    client.on('error', function(err){
+        console.log("Error: "+err.message);
+    })
     res.send('OK');
+    client.destroy();
 });
 
 app.listen(8080);
